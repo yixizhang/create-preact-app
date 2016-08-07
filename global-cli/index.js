@@ -13,21 +13,21 @@
 //   /!\ DO NOT MODIFY THIS FILE /!\
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// create-react-app is installed globally on people's computers. This means
+// create-preact-app is installed globally on people's computers. This means
 // that it is extremely difficult to have them upgrade the version and
 // because there's only one global version installed, it is very prone to
 // breaking changes.
 //
-// The only job of create-react-app is to init the repository and then
-// forward all the commands to the local version of create-react-app.
+// The only job of create-preact-app is to init the repository and then
+// forward all the commands to the local version of create-preact-app.
 //
 // If you need to add a new command, please add it to the scripts/ folder.
 //
 // The only reason to modify this file is to add more warnings and
-// troubleshooting information for the `create-react-app` command.
+// troubleshooting information for the `create-preact-app` command.
 //
 // Do not make breaking changes! We absolutely don't want to have to
-// tell people to update their global version of create-react-app.
+// tell people to update their global version of create-preact-app.
 //
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //   /!\ DO NOT MODIFY THIS FILE /!\
@@ -55,11 +55,11 @@ var argv = require('minimist')(process.argv.slice(2));
 var commands = argv._;
 if (commands.length === 0) {
   if (argv.version) {
-    console.log('create-react-app version: ' + require('./package.json').version);
+    console.log('create-preact-app version: ' + require('./package.json').version);
     process.exit();
   }
   console.error(
-    'Usage: create-react-app <project-directory> [--verbose]'
+    'Usage: create-preact-app <project-directory> [--verbose]'
   );
   process.exit(1);
 }
@@ -76,7 +76,7 @@ function createApp(name, verbose, version) {
   var appName = path.basename(root);
 
   console.log(
-    'Creating a new React app in ' + root + '.'
+    'Creating a new Preact app in ' + root + '.'
   );
   console.log();
 
@@ -95,7 +95,7 @@ function createApp(name, verbose, version) {
   process.chdir(root);
 
   console.log('Installing packages. This might take a couple minutes.');
-  console.log('Installing react-scripts from npm...');
+  console.log('Installing preact-scripts from npm...');
   console.log();
 
   run(root, appName, version, verbose, originalDirectory);
@@ -121,7 +121,7 @@ function run(root, appName, version, verbose, originalDirectory) {
     var scriptsPath = path.resolve(
       process.cwd(),
       'node_modules',
-      'react-scripts',
+      'preact-scripts',
       'scripts',
       'init.js'
     );
@@ -131,7 +131,7 @@ function run(root, appName, version, verbose, originalDirectory) {
 }
 
 function getInstallPackage(version) {
-  var packageToInstall = 'react-scripts';
+  var packageToInstall = 'preact-scripts';
   var validSemver = semver.valid(version);
   if (validSemver) {
     packageToInstall += '@' + validSemver;
@@ -146,7 +146,7 @@ function checkNodeVersion() {
   var packageJsonPath = path.resolve(
     process.cwd(),
     'node_modules',
-    'react-scripts',
+    'preact-scripts',
     'package.json'
   );
   var packageJson = require(packageJsonPath);
@@ -157,7 +157,7 @@ function checkNodeVersion() {
   if (!semver.satisfies(process.version, packageJson.engines.node)) {
     console.error(
       chalk.red(
-        'You are currently running Node %s but create-react-app requires %s.' +
+        'You are currently running Node %s but create-preact-app requires %s.' +
         ' Please use a supported version of Node.\n'
       ),
       process.version,

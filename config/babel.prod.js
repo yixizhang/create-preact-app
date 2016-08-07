@@ -36,6 +36,9 @@ module.exports = {
       regenerator: true
     }],
     // Optimization: hoist JSX that never changes out of render()
-    require.resolve('babel-plugin-transform-react-constant-elements')
+    require.resolve('babel-plugin-transform-react-constant-elements'),
+    [require.resolve('babel-plugin-transform-react-jsx'), {
+      pragma: 'h'
+    }]
   ]
 };

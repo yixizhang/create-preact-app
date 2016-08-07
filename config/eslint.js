@@ -52,6 +52,9 @@ module.exports = {
       node: {
         extensions: ['.js', '.json']
       }
+    },
+    react: {
+      pragma: 'h'
     }
   },
 

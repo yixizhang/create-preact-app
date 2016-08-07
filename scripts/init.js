@@ -12,7 +12,7 @@ var path = require('path');
 var spawn = require('cross-spawn');
 
 module.exports = function(appPath, appName, verbose, originalDirectory) {
-  var ownPath = path.join(appPath, 'node_modules', 'react-scripts');
+  var ownPath = path.join(appPath, 'node_modules', 'preact-scripts');
 
   var appPackage = require(path.join(appPath, 'package.json'));
   var ownPackage = require(path.join(ownPath, 'package.json'));
@@ -20,7 +20,7 @@ module.exports = function(appPath, appName, verbose, originalDirectory) {
   // Copy over some of the devDependencies
   appPackage.dependencies = appPackage.dependencies || {};
   appPackage.devDependencies = appPackage.devDependencies || {};
-  ['react', 'react-dom'].forEach(function (key) {
+  ['preact'].forEach(function (key) {
     appPackage.dependencies[key] = ownPackage.devDependencies[key];
   });
   ['react-test-renderer'].forEach(function (key) {
@@ -30,12 +30,12 @@ module.exports = function(appPath, appName, verbose, originalDirectory) {
   // Setup the script rules
   appPackage.scripts = {};
   ['start', 'build', 'eject', 'test'].forEach(function(command) {
-    appPackage.scripts[command] = 'react-scripts ' + command;
+    appPackage.scripts[command] = 'preact-scripts ' + command;
   });
 
   // explicitly specify ESLint config path for editor plugins
   appPackage.eslintConfig = {
-    extends: './node_modules/react-scripts/config/eslint.js',
+    extends: './node_modules/preact-scripts/config/eslint.js',
   };
 
   fs.writeFileSync(
@@ -50,8 +50,8 @@ module.exports = function(appPath, appName, verbose, originalDirectory) {
   // See: https://github.com/npm/npm/issues/1862
   fs.move(path.join(appPath, 'gitignore'), path.join(appPath, '.gitignore'), []);
 
-  // Run another npm install for react and react-dom
-  console.log('Installing react and react-dom from npm...');
+  // Run another npm install for preact
+  console.log('Installing preact from npm...');
   console.log();
   // TODO: having to do two npm installs is bad, can we avoid it?
   var args = [

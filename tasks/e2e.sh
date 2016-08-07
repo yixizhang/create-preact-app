@@ -85,7 +85,7 @@ npm install $cli_path
 # Install the app in a temporary location
 temp_app_path=`mktemp -d 2>/dev/null || mktemp -d -t 'temp_app_path'`
 cd $temp_app_path
-node "$temp_cli_path"/node_modules/create-react-app/index.js --scripts-version=$scripts_path test-app
+node "$temp_cli_path"/node_modules/create-preact-app/index.js --scripts-version=$scripts_path test-app
 cd test-app
 
 # Test the build

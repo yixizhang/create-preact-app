@@ -1,20 +1,21 @@
 {
-  "name": "create-react-app",
-  "version": "0.2.0",
+  "name": "create-preact-app",
+  "version": "0.1.0",
   "keywords": [
-    "react"
+    "react",
+    "preact"
   ],
-  "description": "Create React apps with no build configuration.",
-  "repository": "facebookincubator/create-react-app",
+  "description": "Create Preact apps with no build configuration.",
+  "repository": "alexkuz/create-preact-app",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/facebookincubator/create-react-app/issues"
+    "url": "https://github.com/alexkuz/create-preact-app/issues"
   },
   "files": [
     "index.js"
   ],
   "bin": {
-    "create-react-app": "./index.js"
+    "create-preact-app": "./index.js"
   },
   "dependencies": {
     "chalk": "^1.1.1",

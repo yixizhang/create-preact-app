@@ -86,8 +86,8 @@ prompt(
   var ownPackage = require(path.join(ownPath, 'package.json'));
   var appPackage = require(path.join(appPath, 'package.json'));
 
-  console.log('Removing dependency: react-scripts');
-  delete appPackage.devDependencies['react-scripts'];
+  console.log('Removing dependency: preact-scripts');
+  delete appPackage.devDependencies['preact-scripts'];
 
   Object.keys(ownPackage.dependencies).forEach(function (key) {
     // For some reason optionalDependencies end up in dependencies after install

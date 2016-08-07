@@ -37,6 +37,9 @@ module.exports = {
       helpers: false,
       polyfill: false,
       regenerator: true
+    }],
+    [require.resolve('babel-plugin-transform-react-jsx'), {
+      pragma: 'h'
     }]
   ]
 };

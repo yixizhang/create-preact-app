@@ -1,18 +1,18 @@
 {
-  "name": "react-scripts",
-  "version": "0.3.0-alpha",
-  "description": "Configuration and scripts for Create React App.",
-  "repository": "facebookincubator/create-react-app",
+  "name": "preact-scripts",
+  "version": "0.1.0",
+  "description": "Configuration and scripts for Create Preact App.",
+  "repository": "alexkuz/create-preact-app",
   "license": "BSD-3-Clause",
   "engines": {
     "node": ">=4"
   },
   "bugs": {
-    "url": "https://github.com/facebookincubator/create-react-app/issues"
+    "url": "https://github.com/alexkuz/create-preact-app/issues"
   },
   "scripts": {
     "build": "node scripts/build.js --debug-template",
-    "create-react-app": "node global-cli/index.js --scripts-version \"$PWD/`npm pack`\"",
+    "create-preact-app": "node global-cli/index.js --scripts-version \"$PWD/`npm pack`\"",
     "e2e": "tasks/e2e.sh",
     "start": "node scripts/start.js --debug-template",
     "test": "node scripts/test.js --debug-template"
@@ -25,7 +25,7 @@
     "template"
   ],
   "bin": {
-    "react-scripts": "./bin/react-scripts.js"
+    "preact-scripts": "./bin/preact-scripts.js"
   },
   "dependencies": {
     "autoprefixer": "6.4.0",
@@ -79,8 +79,7 @@
   },
   "devDependencies": {
     "bundle-deps": "1.0.0",
-    "react": "^15.3.0",
-    "react-dom": "^15.3.0",
+    "preact": "^5.6.0",
     "react-test-renderer": "^15.3.0"
   },
   "optionalDependencies": {
