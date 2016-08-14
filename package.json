@@ -1,6 +1,6 @@
 {
   "name": "preact-scripts",
-  "version": "0.1.0",
+  "version": "0.3.0-alpha",
   "description": "Configuration and scripts for Create Preact App.",
   "repository": "alexkuz/create-preact-app",
   "license": "BSD-3-Clause",
