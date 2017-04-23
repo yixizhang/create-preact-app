@@ -7,8 +7,8 @@ node_js:
 cache:
   directories:
   - node_modules
-  - packages/create-react-app/node_modules
-  - packages/react-scripts/node_modules
+  - packages/create-preact-compat-app/node_modules
+  - packages/preact-compat-scripts/node_modules
 install: true
 script:
  - 'if [ $TEST_SUITE = "simple" ]; then tasks/e2e-simple.sh; fi'

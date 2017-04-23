@@ -88,11 +88,14 @@ module.exports = {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
+      // Preact-compat aliases
+      'react': 'preact-compat',
+      'react-dom': 'preact-compat',
     },
   },
   // @remove-on-eject-begin
   // Resolve loaders (webpack plugins for CSS, images, transpilation) from the
-  // directory of `react-scripts` itself rather than the project directory.
+  // directory of `preact-compat-scripts` itself rather than the project directory.
   resolveLoader: {
     modules: [
       paths.ownNodeModules,

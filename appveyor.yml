@@ -23,7 +23,7 @@ environment:
 
 cache:
   - node_modules -> appveyor.cleanup-cache.txt
-  - packages\react-scripts\node_modules -> appveyor.cleanup-cache.txt
+  - packages\preact-compat-scripts\node_modules -> appveyor.cleanup-cache.txt
 
 clone_depth: 50
 

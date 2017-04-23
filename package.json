@@ -1,14 +1,14 @@
 {
   "private": true,
   "scripts": {
-    "build": "node packages/react-scripts/scripts/build.js",
+    "build": "node packages/preact-compat-scripts/scripts/build.js",
     "changelog": "lerna-changelog",
-    "create-react-app": "tasks/cra.sh",
+    "create-preact-compat-app": "tasks/cpa.sh",
     "e2e": "tasks/e2e-simple.sh",
     "postinstall": "lerna bootstrap",
     "publish": "tasks/release.sh",
-    "start": "node packages/react-scripts/scripts/start.js",
-    "test": "node packages/react-scripts/scripts/test.js --env=jsdom",
+    "start": "node packages/preact-compat-scripts/scripts/start.js",
+    "test": "node packages/preact-compat-scripts/scripts/test.js --env=jsdom",
     "format": "prettier --trailing-comma es5 --single-quote --write 'packages/*/*.js' 'packages/*/!(node_modules)/**/*.js'",
     "precommit": "lint-staged"
   },

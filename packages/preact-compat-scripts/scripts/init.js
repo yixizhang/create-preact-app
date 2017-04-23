@@ -43,10 +43,10 @@ module.exports = function(
 
   // Setup the script rules
   appPackage.scripts = {
-    start: 'react-scripts start',
-    build: 'react-scripts build',
-    test: 'react-scripts test --env=jsdom',
-    eject: 'react-scripts eject',
+    start: 'preact-compat-scripts start',
+    build: 'preact-compat-scripts build',
+    test: 'preact-compat-scripts test --env=jsdom',
+    eject: 'preact-compat-scripts eject',
   };
 
   fs.writeFileSync(
@@ -105,7 +105,7 @@ module.exports = function(
     command = 'npm';
     args = ['install', '--save', verbose && '--verbose'].filter(e => e);
   }
-  args.push('react', 'react-dom');
+  args.push('preact');
 
   // Install additional template dependencies, if present
   const templateDependenciesPath = path.join(
@@ -122,11 +122,11 @@ module.exports = function(
     fs.unlinkSync(templateDependenciesPath);
   }
 
-  // Install react and react-dom for backward compatibility with old CRA cli
-  // which doesn't install react and react-dom along with react-scripts
+  // Install preact for backward compatibility with old CRA cli
+  // which doesn't install preact along with preact-compat-scripts
   // or template is presetend (via --internal-testing-template)
-  if (!isReactInstalled(appPackage) || template) {
-    console.log(`Installing react and react-dom using ${command}...`);
+  if (!isPreactInstalled(appPackage) || template) {
+    console.log(`Installing preact using ${command}...`);
     console.log();
 
     const proc = spawn.sync(command, args, { stdio: 'inherit' });
@@ -190,9 +190,8 @@ module.exports = function(
   console.log('Happy hacking!');
 };
 
-function isReactInstalled(appPackage) {
+function isPreactInstalled(appPackage) {
   const dependencies = appPackage.dependencies || {};
 
-  return typeof dependencies.react !== 'undefined' &&
-    typeof dependencies['react-dom'] !== 'undefined';
+  return typeof dependencies.preact !== 'undefined'
 }

@@ -93,7 +93,7 @@ function resolveOwn(relativePath) {
   return path.resolve(__dirname, '..', relativePath);
 }
 
-// config before eject: we're in ./node_modules/react-scripts/config/
+// config before eject: we're in ./node_modules/preact-compat-scripts/config/
 module.exports = {
   appPath: resolveApp('.'),
   appBuild: resolveApp('build'),
@@ -118,10 +118,10 @@ const reactScriptsPath = resolveApp(`node_modules/${ownPackageJson.name}`);
 const reactScriptsLinked = fs.existsSync(reactScriptsPath) &&
   fs.lstatSync(reactScriptsPath).isSymbolicLink();
 
-// config before publish: we're in ./packages/react-scripts/config/
+// config before publish: we're in ./packages/preact-compat-scripts/config/
 if (
   !reactScriptsLinked &&
-  __dirname.indexOf(path.join('packages', 'react-scripts', 'config')) !== -1
+  __dirname.indexOf(path.join('packages', 'preact-compat-scripts', 'config')) !== -1
 ) {
   module.exports = {
     appPath: resolveApp('.'),

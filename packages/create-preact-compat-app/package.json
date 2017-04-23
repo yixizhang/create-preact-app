@@ -1,24 +1,25 @@
 {
-  "name": "create-react-app",
+  "name": "create-preact-compat-app",
   "version": "1.3.0",
   "keywords": [
-    "react"
+    "react",
+    "preact"
   ],
-  "description": "Create React apps with no build configuration.",
-  "repository": "facebookincubator/create-react-app",
+  "description": "Create Preact apps with no build configuration.",
+  "repository": "yixizhang/create-preact-compat-app",
   "license": "BSD-3-Clause",
   "engines": {
     "node": ">=4"
   },
   "bugs": {
-    "url": "https://github.com/facebookincubator/create-react-app/issues"
+    "url": "https://github.com/yixizhang/create-preact-compat-app/issues"
   },
   "files": [
     "index.js",
-    "createReactApp.js"
+    "createPreactCompatApp.js"
   ],
   "bin": {
-    "create-react-app": "./index.js"
+    "create-preact-compat-app": "./index.js"
   },
   "dependencies": {
     "chalk": "^1.1.1",

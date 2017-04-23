@@ -11,21 +11,21 @@
 //   /!\ DO NOT MODIFY THIS FILE /!\
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// create-react-app is installed globally on people's computers. This means
+// create-preact-compat-app is installed globally on people's computers. This means
 // that it is extremely difficult to have them upgrade the version and
 // because there's only one global version installed, it is very prone to
 // breaking changes.
 //
-// The only job of create-react-app is to init the repository and then
-// forward all the commands to the local version of create-react-app.
+// The only job of create-preact-compat-app is to init the repository and then
+// forward all the commands to the local version of create-preact-compat-app.
 //
 // If you need to add a new command, please add it to the scripts/ folder.
 //
 // The only reason to modify this file is to add more warnings and
-// troubleshooting information for the `create-react-app` command.
+// troubleshooting information for the `create-preact-compat-app` command.
 //
 // Do not make breaking changes! We absolutely don't want to have to
-// tell people to update their global version of create-react-app.
+// tell people to update their global version of create-preact-compat-app.
 //
 // Also be careful with new language features.
 // This file must work on Node 4+.
@@ -63,7 +63,7 @@ const program = new commander.Command(packageJson.name)
   .option('--verbose', 'print additional logs')
   .option(
     '--scripts-version <alternative-package>',
-    'use a non-standard version of react-scripts'
+    'use a non-standard version of preact-compat-scripts'
   )
   .allowUnknownOption()
   .on('--help', () => {
@@ -74,10 +74,10 @@ const program = new commander.Command(packageJson.name)
     );
     console.log(`      - a specific npm version: ${chalk.green('0.8.2')}`);
     console.log(
-      `      - a custom fork published on npm: ${chalk.green('my-react-scripts')}`
+      `      - a custom fork published on npm: ${chalk.green('my-preact-compat-scripts')}`
     );
     console.log(
-      `      - a .tgz archive: ${chalk.green('https://mysite.com/my-react-scripts-0.8.2.tgz')}`
+      `      - a .tgz archive: ${chalk.green('https://mysite.com/my-preact-compat-scripts-0.8.2.tgz')}`
     );
     console.log(
       `    It is not needed unless you specifically want to use a fork.`
@@ -145,7 +145,7 @@ function createApp(name, verbose, version, template) {
     process.exit(1);
   }
 
-  console.log(`Creating a new React app in ${chalk.green(root)}.`);
+  console.log(`Creating a new Preact app in ${chalk.green(root)}.`);
   console.log();
 
   const packageJson = {
@@ -214,7 +214,7 @@ function install(useYarn, dependencies, verbose, isOnline) {
 
 function run(root, appName, version, verbose, originalDirectory, template) {
   const packageToInstall = getInstallPackage(version);
-  const allDependencies = ['react', 'react-dom', packageToInstall];
+  const allDependencies = ['preact', "preact-compat", packageToInstall];
 
   console.log('Installing packages. This might take a couple minutes.');
 
@@ -228,7 +228,7 @@ function run(root, appName, version, verbose, originalDirectory, template) {
       const isOnline = info.isOnline;
       const packageName = info.packageName;
       console.log(
-        `Installing ${chalk.cyan('react')}, ${chalk.cyan('react-dom')}, and ${chalk.cyan(packageName)}...`
+        `Installing ${chalk.cyan('preact')}, ${chalk.cyan('preact-compat')}, and ${chalk.cyan(packageName)}...`
       );
       console.log();
 
@@ -239,7 +239,7 @@ function run(root, appName, version, verbose, originalDirectory, template) {
     .then(packageName => {
       checkNodeVersion(packageName);
 
-      // Since react-scripts has been installed with --save
+      // Since preact-compat-scripts has been installed with --save
       // we need to move it into devDependencies and rewrite package.json
       // also ensure react dependencies have caret version range
       fixDependencies(packageName);
@@ -302,7 +302,7 @@ function run(root, appName, version, verbose, originalDirectory, template) {
 }
 
 function getInstallPackage(version) {
-  let packageToInstall = 'react-scripts';
+  let packageToInstall = 'preact-compat-scripts';
   const validSemver = semver.valid(version);
   if (validSemver) {
     packageToInstall += `@${validSemver}`;
@@ -370,7 +370,7 @@ function getPackageName(installPackage) {
         return packageName;
       })
       .catch(err => {
-        // The package name could be with or without semver version, e.g. react-scripts-0.2.0-alpha.1.tgz
+        // The package name could be with or without semver version, e.g. preact-compat-scripts-0.2.0-alpha.1.tgz
         // However, this function returns package name only without semver version.
         console.log(
           `Could not extract the package name from the archive: ${err.message}`
@@ -385,8 +385,8 @@ function getPackageName(installPackage) {
       });
   } else if (installPackage.indexOf('git+') === 0) {
     // Pull package name out of git urls e.g:
-    // git+https://github.com/mycompany/react-scripts.git
-    // git+ssh://github.com/mycompany/react-scripts.git#v1.2.3
+    // git+https://github.com/mycompany/preact-compat-scripts.git
+    // git+ssh://github.com/mycompany/preact-compat-scripts.git#v1.2.3
     return Promise.resolve(installPackage.match(/([^\/]+)\.git(#.*)?$/)[1]);
   } else if (installPackage.indexOf('@') > 0) {
     // Do not match @scope/ when stripping off @version or @tag
@@ -434,7 +434,7 @@ function checkNodeVersion(packageName) {
     console.error(
       chalk.red(
         'You are running Node %s.\n' +
-          'Create React App requires Node %s or higher. \n' +
+          'Create Preact-compat App requires Node %s or higher. \n' +
           'Please update your version of Node.'
       ),
       process.version,
@@ -456,8 +456,8 @@ function checkAppName(appName) {
   }
 
   // TODO: there should be a single place that holds the dependencies
-  const dependencies = ['react', 'react-dom'];
-  const devDependencies = ['react-scripts'];
+  const dependencies = ['preact', 'preact-compat'];
+  const devDependencies = ['preact-compat-scripts'];
   const allDependencies = dependencies.concat(devDependencies).sort();
   if (allDependencies.indexOf(appName) >= 0) {
     console.error(
@@ -512,15 +512,14 @@ function fixDependencies(packageName) {
   packageJson.devDependencies[packageName] = packageVersion;
   delete packageJson.dependencies[packageName];
 
-  makeCaretRange(packageJson.dependencies, 'react');
-  makeCaretRange(packageJson.dependencies, 'react-dom');
+  makeCaretRange(packageJson.dependencies, 'preact', 'preact-compat');
 
   fs.writeFileSync(packagePath, JSON.stringify(packageJson, null, 2));
 }
 
 // If project only contains files generated by GH, it’s safe.
 // We also special case IJ-based products .idea because it integrates with CRA:
-// https://github.com/facebookincubator/create-react-app/pull/368#issuecomment-243446094
+// https://github.com/facebookincubator/create-preact-compat-app/pull/368#issuecomment-243446094
 function isSafeToCreateProjectIn(root) {
   const validFiles = [
     '.DS_Store',

@@ -23,7 +23,7 @@ var execOptions = {
 };
 
 function isProcessAReactApp(processCommand) {
-  return /^node .*react-scripts\/scripts\/start\.js\s?$/.test(processCommand);
+  return /^node .*preact-compat-scripts\/scripts\/start\.js\s?$/.test(processCommand);
 }
 
 function getProcessIdOnPort(port) {

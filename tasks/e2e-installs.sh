@@ -66,8 +66,8 @@ function checkDependencies {
   fi
 }
 
-function create_react_app {
-  node "$temp_cli_path"/node_modules/create-react-app/index.js $*
+function create_preact_app {
+  node "$temp_cli_path"/node_modules/create-preact-compat-app/index.js $*
 }
 
 # Exit the script with a helpful error message when any error is encountered
@@ -100,11 +100,11 @@ fi
 ./node_modules/.bin/lerna bootstrap --concurrency=1
 
 # ******************************************************************************
-# First, pack and install create-react-app.
+# First, pack and install create-preact-compat-app.
 # ******************************************************************************
 
 # Pack CLI
-cd "$root_path"/packages/create-react-app
+cd "$root_path"/packages/create-preact-compat-app
 cli_path=$PWD/`npm pack`
 
 # Install the CLI in a temporary location
@@ -116,12 +116,12 @@ npm install "$cli_path"
 # ******************************************************************************
 
 cd "$temp_app_path"
-create_react_app --scripts-version=0.4.0 test-app-version-number
+create_preact_app --scripts-version=0.4.0 test-app-version-number
 cd test-app-version-number
 
 # Check corresponding scripts version is installed.
-exists node_modules/react-scripts
-grep '"version": "0.4.0"' node_modules/react-scripts/package.json
+exists node_modules/preact-compat-scripts
+grep '"version": "0.4.0"' node_modules/preact-compat-scripts/package.json
 checkDependencies
 
 # ******************************************************************************
@@ -129,24 +129,24 @@ checkDependencies
 # ******************************************************************************
 
 cd "$temp_app_path"
-create_react_app --scripts-version=https://registry.npmjs.org/react-scripts/-/react-scripts-0.4.0.tgz test-app-tarball-url
+create_preact_app --scripts-version=https://registry.npmjs.org/preact-compat-scripts/-/preact-compat-scripts-0.4.0.tgz test-app-tarball-url
 cd test-app-tarball-url
 
 # Check corresponding scripts version is installed.
-exists node_modules/react-scripts
-grep '"version": "0.4.0"' node_modules/react-scripts/package.json
+exists node_modules/preact-compat-scripts
+grep '"version": "0.4.0"' node_modules/preact-compat-scripts/package.json
 checkDependencies
 
 # ******************************************************************************
-# Test --scripts-version with a custom fork of react-scripts
+# Test --scripts-version with a custom fork of preact-compat-scripts
 # ******************************************************************************
 
 cd "$temp_app_path"
-create_react_app --scripts-version=react-scripts-fork test-app-fork
+create_preact_app --scripts-version=preact-compat-scripts-fork test-app-fork
 cd test-app-fork
 
 # Check corresponding scripts version is installed.
-exists node_modules/react-scripts-fork
+exists node_modules/preact-compat-scripts-fork
 
 # ******************************************************************************
 # Test project folder is deleted on failing package installation
@@ -154,7 +154,7 @@ exists node_modules/react-scripts-fork
 
 cd "$temp_app_path"
 # we will install a non-existing package to simulate a failed installataion.
-create_react_app --scripts-version=`date +%s` test-app-should-not-exist || true
+create_preact_app --scripts-version=`date +%s` test-app-should-not-exist || true
 # confirm that the project folder was deleted
 test ! -d test-app-should-not-exist
 
@@ -166,7 +166,7 @@ cd "$temp_app_path"
 mkdir test-app-should-remain
 echo '## Hello' > ./test-app-should-remain/README.md
 # we will install a non-existing package to simulate a failed installataion.
-create_react_app --scripts-version=`date +%s` test-app-should-remain || true
+create_preact_app --scripts-version=`date +%s` test-app-should-remain || true
 # confirm the file exist
 test -e test-app-should-remain/README.md
 # confirm only README.md is the only file in the directory
@@ -175,16 +175,16 @@ if [ "$(ls -1 ./test-app-should-remain | wc -l | tr -d '[:space:]')" != "1" ]; t
 fi
 
 # ******************************************************************************
-# Test --scripts-version with a scoped fork tgz of react-scripts
+# Test --scripts-version with a scoped fork tgz of preact-compat-scripts
 # ******************************************************************************
 
 cd $temp_app_path
-curl "https://registry.npmjs.org/@enoah_netzach/react-scripts/-/react-scripts-0.9.0.tgz" -o enoah-scripts-0.9.0.tgz
-create_react_app --scripts-version=$temp_app_path/enoah-scripts-0.9.0.tgz test-app-scoped-fork-tgz
+curl "https://registry.npmjs.org/@enoah_netzach/preact-compat-scripts/-/preact-compat-scripts-0.9.0.tgz" -o enoah-scripts-0.9.0.tgz
+create_preact_app --scripts-version=$temp_app_path/enoah-scripts-0.9.0.tgz test-app-scoped-fork-tgz
 cd test-app-scoped-fork-tgz
 
 # Check corresponding scripts version is installed.
-exists node_modules/@enoah_netzach/react-scripts
+exists node_modules/@enoah_netzach/preact-compat-scripts
 
 # ******************************************************************************
 # Test nested folder path as the project name
@@ -195,20 +195,20 @@ cd "$temp_app_path"
 mkdir test-app-nested-paths-t1
 cd test-app-nested-paths-t1
 mkdir -p test-app-nested-paths-t1/aa/bb/cc/dd
-create_react_app test-app-nested-paths-t1/aa/bb/cc/dd
+create_preact_app test-app-nested-paths-t1/aa/bb/cc/dd
 cd test-app-nested-paths-t1/aa/bb/cc/dd
 npm start -- --smoke-test
 
 # Testing a path that does not exist
 cd "$temp_app_path"
-create_react_app test-app-nested-paths-t2/aa/bb/cc/dd
+create_preact_app test-app-nested-paths-t2/aa/bb/cc/dd
 cd test-app-nested-paths-t2/aa/bb/cc/dd
 npm start -- --smoke-test
 
 # Testing a path that is half exists
 cd "$temp_app_path"
 mkdir -p test-app-nested-paths-t3/aa
-create_react_app test-app-nested-paths-t3/aa/bb/cc/dd
+create_preact_app test-app-nested-paths-t3/aa/bb/cc/dd
 cd test-app-nested-paths-t3/aa/bb/cc/dd
 npm start -- --smoke-test
 
